@@ -1,0 +1,103 @@
+// Os integrantes envolvidos são: Ana Beatriz Silva Firmino (SP3044157), Batriz Araújo dos Santos (SP3072401), Bernardo de Freitas Mendonça (SP3067394), Dayane da Silva Matias (SP307532X), Giovanna Alves da Silva (SP3065936), Gustavo Moraes Daun (SP3066029)
+
+Import java.util.*; // biblioteca que serve para chamar a função random e outras funções.
+
+public class jogoDados { // classe pública, ou seja, pode ser chamada em outras classes
+
+private Random randomNum = new Random(); // serve para proibir que outra classe que não seja a própria classe tenha acesso ao atributo.
+
+private enum Status {Continue, WON, LOST}; // variável de tipos fixos do tipo inteiro
+
+private final static int SNAKE_EYES = 2; // variáveis de tipos fixos do tipo inteiro que contém o valor 2
+
+private final static int TREY = 3; // variável do tipo inteira fixa e que possui o valor 3
+
+private final static int SEVEN = 7; // variavel de tipos fixos do tipo inteiro que contém o valor 7
+
+private final static int YO_LEVEN = 11; // variavel de tipos fixos do tipo inteiro que contém o valor 11
+
+private final static int BOX_CARS = 12; // variavel de tipos fixos do tipo inteiro que contém o valor 12
+
+public void play() // classe pública que não retorna o valor, apenas realiza as instruções e armazena os resultados
+
+{
+
+int myPoint = 0; // declaração da variável myPoint, no qual está sendo igualada a zero
+
+Status gameStatus; // declaração do status do game
+
+int sumDice = rollDice(); // declaração da variável sumDice, no qual está sendo igualada a variável rollDice()
+
+switch (sumDice) // corresponde a uma seleção múltipla que tem como função realizar instruções específicas para cada caso.
+
+{
+
+case SEVEN://define a variável SEVEN
+
+case YO_LEVEN://define a variável YO_LEVEN
+
+gameStatus = Status.WON;//verifica-se que  o jogador ganhou
+
+case SNAKE_EYES://define a variável SNAKE_EYES
+
+case BOX_CARS://define a variável BOX_CARS
+
+gameStatus = Status.LOST;//verifica-se que  o jogador perdeu
+
+case TREY://define a variável TREY
+
+default:// método que permite que um método seja implementado na interface, sem quebrar  a compatibilidade com todos os métodos que ela implementam
+
+gameStatus = Status.Continue;//verifica-se que o jogo continua
+
+myPoint= sumDice;// declaração da variável myPoint,no qual está sendo igualada a variável sumDice
+
+System.out.printf("Point is %d\n", myPoint);//  mostra os dados formatados na saída
+
+break;// comando que serve para parar uma declaração switch ou um loop
+
+}
+
+while(gameStatus==Status.Continue){ // construi uma estrutura de repetição por um período determinado
+
+sumDice = rollDice();// declaração da variável sumDice, no qual está sendo igualada a variável rollDice()
+
+if(sumDice == myPoint)// declaração de uma possibilidade
+
+gameStatus = Status.WON;//declaração de que o jogador ganhou
+
+else
+
+if(sumDice == SEVEN)// declaração de uma possibilidade
+
+gameStatus = Status.LOST;// declaração de que o jogador perdeu
+
+}
+
+if (gameStatus == Status.WON)//declaração de uma possibilidade
+
+System.out.println("Player wins!");//serve pra imprimir a frase “Player wins!”
+
+else
+
+System.out.println("Player loses!");//serve pra imprimir a frase “Player lose!”
+
+}
+
+public int rollDice()// torna a variável rollDice() pública
+
+{
+
+int die1 = 1 + randomNum.nextInt(6);// resultado da soma do int die1
+
+int die2 = 1 + randomNum.nextInt(6);// resultado da soma do int die2
+
+int sum = die1 + die2;// resultado da soma do int sum
+
+System.out.printf("Player rolled %d = %d\n", die1, die2, sum);//
+
+return sum;// retorno
+
+}
+
+}
